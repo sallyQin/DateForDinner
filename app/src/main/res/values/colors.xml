@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorText">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#828282</color>
+    <color name="unSelected_txt_color">#828282</color>
+    <color name="selected_txt_color">#000000</color>
+    <color name="underline_color">#E0E0E0</color>
+    <color name="spinner_focused">#FFD700</color>
+    <color name="spinner_normal">#FFFFFF</color>
+</resources>
