@@ -3,7 +3,9 @@ package com.example.a1.datefordinner;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -25,9 +27,9 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
     TextView publish_txt;
     ImageView male_icon,female_icon,person_icon,male_logo,female_logo;
     TextView male_txt,female_txt,person_txt,date_text,time_text;
-    LinearLayout male_liner,female_liner,person_liner,date_linear,time_linear,timeDatePicker_id,nickname_linear;
+    LinearLayout male_liner,female_liner,person_liner,date_linear,time_linear,timeDatePicker_id,nickname_linear,whole_date_liner;
     CheckBox cbx_2persons,cbx_5persons,cbx_10persons,cbx_myTreat,cbx_AA,cbx_maleAFemaleFree;
-    Spinner spinner_nickname,spinner_location;
+    Spinner spinner_nickname,spinner_location,spinner_explain;
     SimpleDraweeView avatar_pic;
     DatePicker datePicker;
     TimePicker timePicker;
@@ -35,11 +37,14 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayAdapter <String> adapterNickname;//创建一个数组适配器
     private List<String> list_location = new ArrayList<>();//创建一个String类型的数组列表
     private SimpleArrayAdapter<String> adapterLocation;//创建一个数组适配器
+    private List<String> list_explain = new ArrayList<>();//创建一个String类型的数组列表
+    private SimpleArrayAdapter<String> adapterExplain;//创建一个数组适配器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_date_actvity);
+        whole_date_liner = (LinearLayout) findViewById(R.id.whole_date_liner);
         cancel_txt = (TextView) findViewById(R.id.cancel);
         publish_txt = (TextView) findViewById(R.id.publish);
         male_icon = (ImageView) findViewById(R.id.male_icon);
@@ -66,12 +71,25 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         avatar_pic = (SimpleDraweeView) findViewById(R.id.avatar_pic);
         spinner_location = (Spinner) findViewById(R.id.spinner_location);
         spinner_nickname = (Spinner) findViewById(R.id.spinner_nickname);
+        spinner_explain = (Spinner) findViewById(R.id.spinner_explain);
         date_text = (TextView) findViewById(R.id.date_text);
         time_text = (TextView) findViewById(R.id.time_text);
         nickname_linear = (LinearLayout) findViewById(R.id.nickname_linear);
         timeDatePicker_id = (LinearLayout) findViewById(R.id.timeDatePicker_id);
-
-
+        whole_date_liner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getInvisible_dateAndtime();
+            }
+        });
+        spinner_nickname.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                getInvisible_dateAndtime();
+                initNickernameList();
+                return true;
+            }
+        });
         datePicker.init(2017, 9, 10, new DatePicker.OnDateChangedListener() {//日期选择器的监听器
 
             @Override
@@ -118,9 +136,10 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         time_linear.setOnClickListener(this);
         nickname_linear.setOnClickListener(this);
 
+
         initNickernameList();//设置Nickname的spinner下拉菜单内容
         initLocationList();//设置Location的spinner下拉菜单内容
-
+        initExplainList(); //设置说明的spinner下拉菜单内容
 
         male_txt.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG); //下划线
         male_txt.getPaint().setAntiAlias(true);//抗锯齿
@@ -149,9 +168,6 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
                 getInvisible_dateAndtime();
                 break;
             case R.id.spinner_location:
-                getInvisible_dateAndtime();
-                break;
-            case R.id.edit_explain:
                 getInvisible_dateAndtime();
                 break;
             case R.id.male_liner: //约饭对象
@@ -304,14 +320,19 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         adapterNickname = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, list_nickname);
         adapterNickname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_nickname.setAdapter(adapterNickname);
-        getInvisible_dateAndtime();
-//        spinner_nickname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        spinner_nickname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            public void onItemSelected
+//                    (AdapterView<?> parent, View view, int position, long id) {
 //                //To do sth
 //                // 将所选mySpinner 的值带入myTextView 中
 //                //  myTextView.setText("您选择的是：" + adapterNickname.getItem(position));//记录选择的昵称名
 //                getInvisible_dateAndtime();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
 //            }
 //        });
     }
@@ -343,15 +364,54 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         adapterLocation = new SimpleArrayAdapter<>(this, R.layout.simple_spinner_item,list_location);
         adapterLocation.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_location.setAdapter(adapterLocation);
-        spinner_location.setSelection(list_location.size() - 1, true);
-//        spinner_location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //To do sth
-//                // 将所选mySpinner 的值带入myTextView 中
-//                //  myTextView.setText("您选择的是：" + adapterNickname.getItem(position));//记录选择的昵称名
-//                getInvisible_dateAndtime();
-//            }
-//        });
+        spinner_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected
+                    (AdapterView<?> parent, View view, int position, long id) {
+                //To do sth
+                // 将所选mySpinner 的值带入myTextView 中
+                //  myTextView.setText("您选择的是：" + adapterNickname.getItem(position));//记录选择的昵称名
+                getInvisible_dateAndtime();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private  void  initExplainList(){
+        // 添加一个下拉列表项的list，这里添加的项就是下拉列表的菜单项，即数据源
+        list_explain.add("呵呵，只是无聊找人搭伙");
+        list_explain.add("聚餐，人多才会有食欲哦！");
+        list_explain.add("找个有趣的妹子同吃同聊！");
+        list_explain.add("找个幽默的男士边吃边聊");
+        list_explain.add("品有趣食，享有趣事");
+        list_explain.add("玩王者荣耀的约起来");
+        list_explain.add("来边吃边吐槽&减压");
+        list_explain.add("侃侃人生事");
+        list_explain.add("组局吃火锅，人多才热闹");
+        list_explain.add("请给出要约饭的理由");
+        adapterExplain = new SimpleArrayAdapter<>(this, R.layout.simple_spinner_item,list_explain);
+        adapterExplain.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_explain.setAdapter(adapterExplain);
+        spinner_explain.setSelection(list_explain.size() - 1, true);
+        spinner_explain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected
+                    (AdapterView<?> parent, View view, int position, long id) {
+                //To do sth
+                // 将所选mySpinner 的值带入myTextView 中
+                //  myTextView.setText("您选择的是：" + adapterNickname.getItem(position));//记录选择的昵称名
+                getInvisible_dateAndtime();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 }
