@@ -5,27 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:layout_marginTop="@dimen/recy_top_margin"
+        android:layout_marginBottom="@dimen/recy_top_margin"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.facebook.drawee.view.SimpleDraweeView
-            app:placeholderImage="@drawable/icon_placeholder"
+            android:id="@+id/avatar_show_pic"
+            app:placeholderImage="@drawable/boy_avatar"
             app:roundAsCircle="true"
             app:roundingBorderWidth="2dp"
             app:roundingBorderColor="#FFD700"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="42dp"
+            android:layout_height="42dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/nickname_txt"
+                android:id="@+id/nickname_show_txt"
                 android:layout_marginEnd="20dp"
                 android:text="昵称："
                 android:textSize="15sp"
@@ -34,30 +36,45 @@
                 android:layout_height="wrap_content" />
             <LinearLayout
                 android:id="@+id/sex_bg_linear"
-                android:background="@drawable/male_bg1"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_boy_bg"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@drawable/female_sex_logo"
+                    android:id="@+id/sex_show_pic"
+                    android:src="@drawable/male_sex_logo"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="2dp"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp" />
+                    android:layout_marginRight="4dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" />
                 <TextView
-                    android:id="@+id/age"
+                    android:id="@+id/age_txt"
                     android:text="26"
                     android:textColor="#1E90FF"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="4dp"
                     android:textSize="12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:background="#EDEDED"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <TextView
-        android:id="@+id/explain_txt"
+        android:id="@+id/explain_show_txt"
+        android:layout_marginBottom="@dimen/per_line"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:text="说明想约饭的缘由"
         android:textColor="@color/selected_txt_color"
         android:textStyle="bold"
@@ -65,47 +82,115 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout
+        android:layout_marginBottom="@dimen/per_line"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/date_txt"
-            android:layout_marginRight="5dp"
+            android:id="@+id/date_show_txt"
+            android:layout_marginRight="@dimen/margin_line"
             android:text="2017-10-01"
             android:textSize="13sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/time_txt"
-            android:layout_marginRight="5dp"
+            android:id="@+id/time_show_txt"
+            android:layout_marginRight="@dimen/margin_line"
             android:text="15:00"
             android:textSize="13sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/nums_txt"
-            android:layout_marginRight="5dp"
+            android:id="@+id/personNum_show_txt"
+            android:layout_marginRight="@dimen/margin_line"
             android:text="3-5人"
             android:textSize="13sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/cost_txt"
-            android:layout_marginRight="5dp"
+            android:id="@+id/cost_show_txt"
             android:text="AA"
             android:textSize="13sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/location_txt"
-        android:layout_marginRight="6dp"
-        android:text="吃饭地点"
-        android:textSize="13sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginBottom="@dimen/per_line"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/location_logo_pic"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_line"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
+        <TextView
+            android:id="@+id/location_show_txt"
+            android:layout_marginRight="@dimen/margin_line"
+            android:text="吃饭地点"
+            android:textSize="13sp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/myDate_show_txt"
+            android:layout_marginRight="@dimen/margin_line"
+            android:text="男女不限"
+            android:textSize="13sp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="#D6D6D6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <LinearLayout
+        android:paddingTop="@dimen/recy_top_margin"
+        android:paddingBottom="@dimen/recy_top_margin"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/likes_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingRight="6dp"
+                android:text="约否"
+                android:layout_gravity="center_vertical"
+                android:textColor="#636363"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/likes_show_pic"
+                android:src="@drawable/likes_button_unpressed"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:layout_marginRight="60dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#66FFD700"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
 </LinearLayout>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.a1.datefordinner.AddDateActivity">
     <LinearLayout
+        android:id="@+id/whole_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,22 +29,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
+                android:id="@+id/position_id"
                 android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:background="@drawable/map_icon"
-                    app:viewAspectRatio="0.73"
+                    android:id="@+id/position_pic"
+                    app:placeholderImage="@drawable/positioning_icon"
+                    app:viewAspectRatio="1"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp" />
                 <TextView
                     android:id="@+id/location_txt"
                     android:layout_marginLeft="6dp"
                     android:textColor="#FFD700"
-                    android:textSize="15dp"
-                    android:text="上海"
+                    android:textSize="15sp"
+                    android:text="点击定位"
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp" />
@@ -63,34 +66,56 @@
                     android:layout_height="20dp" />
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/myRecycler"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="@dimen/fab_margin"
-            app:borderWidth="0dp"
-            android:src="@drawable/fab_plus"
-            app:backgroundTint="#FFD700"
-            app:rippleColor="#EEAD0E"
-            app:elevation="6dp"/>
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/myRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    android:orientation="vertical" />
+                <LinearLayout
+                    android:layout_marginTop="200dp"
+                    android:layout_marginRight="4dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp">
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/moving_pic"
+                        android:src="@drawable/moving_logo"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp" />
+                </LinearLayout>
+            </FrameLayout>
+        </ScrollView>
     </LinearLayout>
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="@dimen/fab_margin"
+        app:borderWidth="0dp"
+        android:src="@drawable/fab_plus"
+        app:backgroundTint="#FFD700"
+        app:rippleColor="#EEAD0E"
+        app:elevation="6dp"/>
     <!--点击下拉筛选界面-->
     <LinearLayout
         android:id="@+id/pull_down_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B3E9967A"
+        android:background="#EBE9967A"
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -139,7 +164,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:text="性别"
-            android:textColor="@color/colorAccent"
+            android:textColor="#FFFAFA"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -187,7 +212,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="18"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="#FFFAFA"
                     android:textSize="14sp" />
 
                 <TextView
@@ -197,7 +222,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="年龄"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="#FFFAFA"
                     android:textSize="14sp" />
 
                 <TextView
@@ -207,7 +232,7 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:text="50"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="#FFFAFA"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -219,8 +244,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:maxHeight="5dp"
-                android:minHeight="2dp"
+                android:maxHeight="6dp"
+                android:minHeight="3dp"
+                android:thumbOffset="0dp"
                 android:max="50"
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar_bg"
@@ -231,7 +257,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center_horizontal"
                 android:text="花费"
-                android:textColor="@color/colorAccent"
+                android:textColor="#FFFAFA"
                 android:textSize="14sp" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,7 +276,6 @@
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:src="@drawable/selector_aa" />
-
                 <ImageView
                     android:id="@+id/femaleFree_pic"
                     android:layout_width="60dp"

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a1.datefordinner.LocationActivity">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:text="GPS定位"
+                    android:textSize="15sp"
+                    android:textColor="@color/unSelected_txt_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="#DEDEDE"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/realPosition_linear"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:background="#E9967A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/positions_id"
+                    app:placeholderImage="@drawable/positioning_icon"
+                    app:viewAspectRatio="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp" />
+                <TextView
+                    android:id="@+id/position_txt"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="#FFD700"
+                    android:textSize="15sp"
+                    android:text="请点击，进行GSP定位"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="热门城市"
+                    android:textSize="15sp"
+                    android:textColor="@color/unSelected_txt_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="#DEDEDE"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hotCity_recy"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                android:orientation="vertical"
+                app:spanCount="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <include layout="@layout/listview_citylist" />
+
+        </LinearLayout>
+    <!--</ScrollView>-->
+</LinearLayout>

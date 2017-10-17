@@ -2,22 +2,58 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a1.datefordinner">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_rounder"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+
+        <!-- GPS定位 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:permission="android.permission.BAIDU_LOCATION_SERVICE"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.9"></action>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="M3dmFBFMGCzVUMQlyKQODvkW8K8nyNLc" />
+
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddDateActivity"
+        <activity
+            android:name=".AddDateActivity"
+            android:screenOrientation="portrait" />
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="sally.dinnerDateProvider" />
+        <activity android:name=".NotesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LocationActivity"
             android:screenOrientation="portrait"/>
     </application>
 

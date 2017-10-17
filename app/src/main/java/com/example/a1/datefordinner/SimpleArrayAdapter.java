@@ -9,9 +9,9 @@ import java.util.List;
  * 给下拉框的适配器
  */
 
-public class SimpleArrayAdapter<T> extends ArrayAdapter {
+class SimpleArrayAdapter<T> extends ArrayAdapter {
     //构造方法
-    public SimpleArrayAdapter(Context context, int resource, List<T> objects) {
+    SimpleArrayAdapter(Context context, int resource, List<T> objects) {
         super(context, resource, objects);
     }
     //复写这个方法，使返回的数据没有最后一项
